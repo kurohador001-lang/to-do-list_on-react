@@ -8,7 +8,9 @@ const TodoList = (props) => {
   }
 
   const {
-    tasks = []
+    tasks = [],
+    onDeleteTaskClick,
+    onToggleTaskCompleteChange,
   } = props;
 
   return (
@@ -20,6 +22,8 @@ const TodoList = (props) => {
             id = {id}
             title = {title}
             isDone = {isDone}
+            onDeleteTaskClick = {onDeleteTaskClick}
+            onToggleTaskCompleteChange = {onToggleTaskCompleteChange}
           />
       ))}
     </ul>

@@ -4,6 +4,8 @@ const TodoItem = (props) => {
     id,
     title,
     isDone,
+    onDeleteTaskClick,
+    onToggleTaskCompleteChange,
   } = props
 
   return (
@@ -13,7 +15,7 @@ const TodoItem = (props) => {
         id={id}
         type="checkbox"
         checked={isDone}
-        readOnly
+        onChange = {() => onToggleTaskCompleteChange(id, isDone)}
       />
       <label
         className="todo-item__label"
@@ -25,6 +27,7 @@ const TodoItem = (props) => {
         className="todo-item__delete-button"
         aria-label="Delete"
         title="Delete"
+        onClick = {() => onDeleteTaskClick(id)}
       >
         <svg
           width="20"

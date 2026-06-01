@@ -3,7 +3,8 @@ const Field = (props) => {
     className,
     id,
     label,
-    type = "text"
+    type = "text",
+    onSearchInput,
   } = props
 
   return (
@@ -20,6 +21,7 @@ const Field = (props) => {
         placeholder=" "
         autoComplete="off"
         type={type}
+        onInput={(event) => onSearchInput(event.target.value)}
       />
     </div>
   );
