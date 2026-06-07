@@ -4,6 +4,8 @@ const TodoList = (props) => {
   const {
     tasks = [],
     filteredTasks,
+    firstIncompleteTaskRef,
+    firstIncompleteTaskId,
     onDeleteTaskClick,
     onToggleTaskCompleteChange,
   } = props;
@@ -21,15 +23,13 @@ const TodoList = (props) => {
 
   return (
     <ul className="todo__list">
-      {(filteredTasks ?? tasks).map(({className, id, title, isDone}) => (
+      {(filteredTasks ?? tasks).map((task) => (
           <TodoItem
-            key = {id}
-            className = {className}
-            id = {id}
-            title = {title}
-            isDone = {isDone}
+            key = {task.id}
+            ref={task.id === firstIncompleteTaskId ? firstIncompleteTaskRef : null}
             onDeleteTaskClick = {onDeleteTaskClick}
             onToggleTaskCompleteChange = {onToggleTaskCompleteChange}
+            {...task}
           />
       ))}
     </ul>
