@@ -1,10 +1,12 @@
+import { useContext } from "react"
 import Field from "./Field"
+import { TasksContext } from "../context/TasksContext"
 
-const SearchTaskForm = (props) => {
+const SearchTaskForm = () => {
   const {
     searchValue,
     setSearchValue,
-  } = props
+  } = useContext(TasksContext)
 
     return (
       <form
