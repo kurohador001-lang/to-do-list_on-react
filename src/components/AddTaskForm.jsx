@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Button from "./Button";
 import Field from "./Field";
 import { TasksContext } from "../context/TasksContext";
@@ -11,9 +11,25 @@ const AddTaskForm = () => {
     newTaskInputRef,
   } = useContext(TasksContext)
 
+  const clearTaskTitle = taskTitle.trim()
+  const isEmptyTaskTitle = clearTaskTitle.length === 0
+
+  const [error, setError] = useState('')
+
   const onSubmit = (event) => {
     event.preventDefault()
-    addTask()
+    if (!isEmptyTaskTitle) {
+      addTask(clearTaskTitle)
+    }
+  }
+
+  const onInput = (event) => {
+    const {value} = event.target
+    const clearValue = value.trim()
+    const hasOnlySpaces = value.length > 0 && clearValue.length === 0
+
+    setTaskTitle(value)
+    setError(hasOnlySpaces ? 'The task cannot be empty!' : '')
   }
 
   return (
@@ -23,11 +39,13 @@ const AddTaskForm = () => {
           id = "new-task"
           label = "Add New Task"
           value = {taskTitle}
-          onInput = {(event) => setTaskTitle(event.target.value)}
+          error={error}
+          onInput = {onInput}
           ref={newTaskInputRef}
         />
         <Button
           type = "submit"
+          isDisabled={isEmptyTaskTitle}
         >
           Add
         </Button>

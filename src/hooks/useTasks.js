@@ -43,11 +43,10 @@ const useTasks = () => {
     )
   }, [tasks])
 
-  const addTask = useCallback (() => {
-    if (taskTitle.trim().length > 0) {
+  const addTask = useCallback ((title) => {
       const newTask = {
         id: crypto?.randomUUID() ?? Date.now().toString(),
-        title: taskTitle,
+        title,
         isDone: false,
       }
 
@@ -55,8 +54,7 @@ const useTasks = () => {
       setTaskTitle('')
       setSearchValue('')
       newTaskInputRef.current.focus()
-    }
-  }, [taskTitle])
+  }, [])
 
   useEffect(() => {
     saveTasks(tasks)
