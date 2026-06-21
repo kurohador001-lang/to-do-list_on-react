@@ -15,6 +15,17 @@ const tasksAPI = {
       .then((response) => response.json())
   },
 
+  getById: (id) => {
+    return fetch(`${URL}/${id}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error ${response.status}`)
+      }
+
+      return response.json()
+    })
+  },
+
   delete: (id) => {
     return fetch(`${URL}/${id}`, {
       method: "DELETE",
