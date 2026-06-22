@@ -3,8 +3,6 @@ import TasksPage from "./pages/TasksPage"
 import TaskPage from "./pages/TaskPage"
 
 const App = () => {
-  console.log(TaskPage)
-
   const routes = {
     '/': TasksPage,
     '/tasks/:id': TaskPage,

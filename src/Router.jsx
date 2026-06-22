@@ -1,5 +1,29 @@
 import { useEffect, useState } from "react"
 
+const matchPath = (route, path) => {
+  const routePaths = route.split('/')
+  const pathParts = path.split('/')
+  const routePathsLength = routePaths.length
+  const pathPartsLength = pathParts.length
+
+  if (routePathsLength !== pathPartsLength) {
+    return null
+  }
+
+  const params = {}
+
+  for (let i = 0; i < routePathsLength; i++) {
+    if (routePaths[i].startsWith(':')) {
+      const param = routePaths[i].slice(1)
+
+      params[param] = pathParts[i]
+    } else if (routePaths[i] !== pathParts[i]) {
+      return null
+    }
+  }
+
+  return params
+}
 
 export const useRoute = () => {
   const [path, setPath] = useState(window.location.pathname)
@@ -23,16 +47,19 @@ const Router = (props) => {
   const { routes } = props
   const path = useRoute()
 
-  if (path.startsWith('/tasks/')) {
-    const id = path.replace('/tasks/', '')
-    const TaskPage = routes['/tasks/:id']
+  for (const route in routes) {
+    const params = matchPath(route, path)
+    
+    if (params) {
+      const Page = routes[route]
 
-    return <TaskPage params = {{ id }} />
+      return <Page params={params}/>
+    }
   }
 
-  const Page = routes[path] ?? routes['*']
+  const NotFound = routes['*']
 
-  return <Page />
+  return <NotFound />
 }
 
 export default Router
