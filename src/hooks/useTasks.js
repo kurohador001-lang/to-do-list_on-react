@@ -2,10 +2,11 @@ import { useState, useRef, useEffect, useMemo, useCallback } from "react"
 import tasksAPI from "../api/tasksAPI"
 
 const useTasks = () => {
- const [tasks, setTasks] = useState([])
-
+  const [tasks, setTasks] = useState([])
   const [taskTitle, setTaskTitle] = useState('')
   const [searchValue, setSearchValue] = useState('')
+  const [disappearingTaskId, setDisappearingTaskId] = useState(null)
+  const [appearingTaskId, setAppearingTaskId] = useState(null)
 
   const newTaskInputRef = useRef(null)
 
@@ -21,9 +22,14 @@ const useTasks = () => {
   const deleteTask = useCallback((taskId) => {
     tasksAPI.delete(taskId)
       .then(() => {
-        setTasks(
-          tasks.filter((task) => task.id !== taskId)
-        )
+        setDisappearingTaskId(taskId)
+
+        setTimeout(() => {
+          setTasks(
+            tasks.filter((task) => task.id !== taskId)
+          )
+          setDisappearingTaskId(null)
+        }, 400)
       })
   }, [tasks])
 
@@ -54,6 +60,10 @@ const useTasks = () => {
         setTaskTitle('')
         setSearchValue('')
         newTaskInputRef.current.focus()
+        setAppearingTaskId(addedTask.id)
+        setTimeout(() => {
+          setAppearingTaskId(null)
+        }, 400)
       })
   }, [])
 
@@ -77,6 +87,8 @@ const useTasks = () => {
     newTaskInputRef,
     taskTitle,
     searchValue,
+    disappearingTaskId,
+    appearingTaskId,
     setSearchValue,
     setTaskTitle,
     addTask,
