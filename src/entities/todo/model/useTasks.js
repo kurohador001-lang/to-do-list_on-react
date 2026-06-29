@@ -95,6 +95,7 @@ const useTasks = () => {
 
   const filteredTasks = useMemo(() => {
     const clearSearchValue = searchValue.trim().toLowerCase();
+
     return clearSearchValue.length > 0
       ? tasks.filter(({ title }) =>
           title.toLowerCase().includes(clearSearchValue),
