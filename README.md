@@ -1,16 +1,57 @@
-# React + Vite
+# Пет-проект: Todo List на React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![](assets/demo.gif)
 
-Currently, two official plugins are available:
+## Демо
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+[**Открыть проект**](https://kurohador001-lang.github.io/to-do-list_on-react/)
 
-## React Compiler
+## :book: Описание:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Todo List** — проект, в котором основной упор был сделан на современные подходы к разработке, масштабируемую архитектуру, разделение ответственности между компонентами и оптимизацию.
 
-## Expanding the ESLint configuration
+## :star2: Реализованный функционал
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* :pushpin: Добавление, поиск и удаление задач
+* :white_check_mark: Отметка задач как выполненных
+* :bar_chart: Отображение общего количества и количества выполненных задач
+* :mag: Подсветка совпадений при поиске
+* :dart: Прокрутка к первой невыполненной задаче
+* :sparkles: Анимации появления и удаления задач
+* :world_map: Маршрутизация между списком задач и страницей отдельной задачи
+* :floppy_disk: Работа с REST API в режиме разработки и автоматическое переключение на localStorage после деплоя
+
+## :gear: Особенности реализации
+
+* Архитектура по методологии **Feature-Sliced Design (FSD)**
+* Компонентный подход
+* Использование модульных SCSS-стилей
+* Реализация кастомных хуков
+* Управление состоянием через useReducer
+* Соблюдение принципов Accessibility (a11y)
+* Оптимизация производительности с помощью:
+
+  * React.memo
+  * useMemo
+  * useCallback
+  * use-context-selector
+
+
+
+## :wrench: Стек технологий в проекте
+
+  * HTML (HTML5)
+  * CSS (CSS3), Sass (SCSS), Animations
+  * JavaScript (ES6+, OOP)
+  * React
+  * Vite
+  * ESLint, Stylelint, Prettier
+  * Feature-Sliced Design, Accessibility, UX
+  * Git (GitHub)
+  * Figma
+
+## :rocket: Запуск проекта
+1. Клонирование репозитория: `git clone`
+2. Установка зависимостей: `npm i`
+3. Запуск локального сервера: `npm run server`
+4. И одновременный запуск самого приложения: `npm run dev`
