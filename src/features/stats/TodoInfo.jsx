@@ -1,13 +1,12 @@
-import { memo, useContext, useMemo } from "react"
-import { TasksContext } from "@/entities/todo"
+import { memo, useMemo } from "react"
+import { useContextSelector } from "use-context-selector"
+import { TasksContext } from "@/widgets/Todo"
 
 const TodoInfo = (props) => {
   const { styles } = props
 
-  const {
-    tasks,
-    deleteAllTasks,
-  } = useContext(TasksContext)
+  const tasks = useContextSelector(TasksContext, (state) => state.tasks)
+  const deleteAllTasks = useContextSelector(TasksContext, (state) => state.deleteAllTasks)
 
   const total = tasks.length
   const done = useMemo(() => {

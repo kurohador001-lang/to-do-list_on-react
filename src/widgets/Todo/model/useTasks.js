@@ -33,7 +33,6 @@ const useTasks = () => {
 
   const [tasks, dispatch] = useReducer(tasksReducer, []);
 
-  const [taskTitle, setTaskTitle] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [disappearingTaskId, setDisappearingTaskId] = useState(null);
   const [appearingTaskId, setAppearingTaskId] = useState(null);
@@ -67,7 +66,7 @@ const useTasks = () => {
       .then(() => dispatch({ type: "TOGGLE_COMPLETE", id: taskId, isDone: isDone }));
     }, []);
 
-  const addTask = useCallback((title) => {
+  const addTask = useCallback((title, callbackAfterAdding) => {
     const newTask = {
       title,
       isDone: false,
@@ -76,7 +75,7 @@ const useTasks = () => {
     tasksAPI.add(newTask)
     .then((addedTask) => {
       dispatch({ type: "ADD", task: addedTask });
-      setTaskTitle("");
+      callbackAfterAdding()
       setSearchValue("");
       newTaskInputRef.current.focus();
       setAppearingTaskId(addedTask.id);
@@ -107,12 +106,10 @@ const useTasks = () => {
     tasks,
     filteredTasks,
     newTaskInputRef,
-    taskTitle,
     searchValue,
     disappearingTaskId,
     appearingTaskId,
     setSearchValue,
-    setTaskTitle,
     addTask,
     toggleTaskComplete,
     deleteTask,

@@ -1,21 +1,24 @@
-import { memo, useContext } from "react";
-import { TasksContext } from "@/entities/todo";
+import { memo } from "react";
+import { useContextSelector } from "use-context-selector";
+import { TasksContext } from "@/widgets/Todo";
+import { highlightCaseInsensitive } from "@/shared/utils/highlight";
 import RouterLink from "@/shared/ui/RouterLink";
 import styles from "./TodoItem.module.scss"
-import { highlightCaseInsensitive } from "@/shared/utils/highlight";
 
 const TodoItem = (props) => {
-  const { className = "", id, title, isDone } = props;
-
   const {
-    deleteTask,
-    toggleTaskComplete,
-    firstIncompleteTaskId,
-    firstIncompleteTaskRef,
-    disappearingTaskId,
+    className = "",
+    id,
+    title,
+    isDone,
+    itemRef,
     appearingTaskId,
-    searchValue,
-  } = useContext(TasksContext);
+    disappearingTaskId,
+  } = props;
+
+  const deleteTask = useContextSelector(TasksContext, (state) => state.deleteTask)
+  const toggleTaskComplete = useContextSelector(TasksContext, (state) => state.toggleTaskComplete)
+  const searchValue = useContextSelector(TasksContext, (state) => state.searchValue)
 
   const highlightSearchValue = highlightCaseInsensitive(title, searchValue)
 
@@ -27,7 +30,7 @@ const TodoItem = (props) => {
         ${disappearingTaskId === id ? styles.isDisappearing : ''}
         ${appearingTaskId === id ? styles.isAppearing : ''}
       `}
-      ref={id === firstIncompleteTaskId ? firstIncompleteTaskRef : null}
+      ref={itemRef}
     >
       <input
         className={styles.checkbox}

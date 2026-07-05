@@ -1,14 +1,17 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
+import { useContextSelector } from "use-context-selector";
+import { TasksContext } from "@/widgets/Todo";
 import Button from "@/shared/ui/Button";
 import Field from "@/shared/ui/Field";
-import { TasksContext } from "@/entities/todo"
+
 
 const AddTaskForm = (props) => {
   const { styles } = props
 
-  const { addTask, taskTitle, setTaskTitle, newTaskInputRef } =
-    useContext(TasksContext);
+  const addTask = useContextSelector(TasksContext, (state) => state.addTask)
+  const newTaskInputRef = useContextSelector(TasksContext, (state) => state.newTaskInputRef)
 
+  const [taskTitle, setTaskTitle] = useState("");
   const clearTaskTitle = taskTitle.trim();
   const isEmptyTaskTitle = clearTaskTitle.length === 0;
 
@@ -17,7 +20,10 @@ const AddTaskForm = (props) => {
   const onSubmit = (event) => {
     event.preventDefault();
     if (!isEmptyTaskTitle) {
-      addTask(clearTaskTitle);
+      addTask(
+        clearTaskTitle,
+        () => setTaskTitle("")
+      );
     }
   };
 

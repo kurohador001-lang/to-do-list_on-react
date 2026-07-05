@@ -1,8 +1,8 @@
-import { createContext, useMemo } from "react"
+import { useMemo } from "react"
+import { createContext } from "use-context-selector";
 import useTasks from "./useTasks"
-import useIncompleteTaskScroll from "./useIncompleteTaskScroll"
 
-export const TasksContext = createContext({})
+export const TasksContext = createContext(null)
 
 export const TasksProvider = (props) => {
   const { children } = props
@@ -11,35 +11,24 @@ export const TasksProvider = (props) => {
     tasks,
     filteredTasks,
     newTaskInputRef,
-    taskTitle,
     searchValue,
     disappearingTaskId,
     appearingTaskId,
     setSearchValue,
-    setTaskTitle,
     addTask,
     toggleTaskComplete,
     deleteTask,
     deleteAllTasks,
   } = useTasks()
 
-  const {
-    firstIncompleteTaskId,
-    firstIncompleteTaskRef,
-  } = useIncompleteTaskScroll(tasks)
-
   const value = useMemo(() => ({
     tasks,
     filteredTasks,
     newTaskInputRef,
-    taskTitle,
     searchValue,
     disappearingTaskId,
     appearingTaskId,
-    firstIncompleteTaskId,
-    firstIncompleteTaskRef,
     setSearchValue,
-    setTaskTitle,
     addTask,
     toggleTaskComplete,
     deleteTask,
@@ -48,20 +37,16 @@ export const TasksProvider = (props) => {
     tasks,
     filteredTasks,
     newTaskInputRef,
-    taskTitle,
     searchValue,
     disappearingTaskId,
     appearingTaskId,
     setSearchValue,
-    setTaskTitle,
     addTask,
     toggleTaskComplete,
     deleteTask,
     deleteAllTasks,
-    firstIncompleteTaskId,
-    firstIncompleteTaskRef,
   ])
- 
+
 
   return (
     <TasksContext.Provider value={value}>

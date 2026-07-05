@@ -1,14 +1,13 @@
-import { useContext } from "react"
+import { useContextSelector } from "use-context-selector"
+import { TasksContext } from "@/widgets/Todo"
 import Field from "@/shared/ui/Field"
-import { TasksContext } from "@/entities/todo"
+
 
 const SearchTaskForm = (props) => {
   const { styles } = props
 
-  const {
-    searchValue,
-    setSearchValue,
-  } = useContext(TasksContext)
+  const searchValue = useContextSelector(TasksContext, (state) => state.searchValue)
+  const setSearchValue = useContextSelector(TasksContext, (state) => state.searchValue)
 
     return (
       <form
