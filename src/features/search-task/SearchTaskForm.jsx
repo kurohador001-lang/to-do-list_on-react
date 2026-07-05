@@ -7,7 +7,7 @@ const SearchTaskForm = (props) => {
   const { styles } = props
 
   const searchValue = useContextSelector(TasksContext, (state) => state.searchValue)
-  const setSearchValue = useContextSelector(TasksContext, (state) => state.searchValue)
+  const setSearchValue = useContextSelector(TasksContext, (state) => state.setSearchValue)
 
     return (
       <form
